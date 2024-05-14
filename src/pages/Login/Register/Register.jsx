@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const Register = () => {
+  const user = useContext(AuthContext)
+  console.log(user)
   return (
     <section style={{backgroundImage:"url(https://i.ibb.co/xJ8Fk3t/registration.jpg)"}}>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
@@ -65,8 +68,7 @@ const Register = () => {
                 </label>
                 <input
                   type="password"
-                  name="password"
-                  id="password"
+                  name="new-password"
                   placeholder="••••••••"
                   className="input w-full bg-gray-50 text-sm font-medium text-gray-900"
                   required
