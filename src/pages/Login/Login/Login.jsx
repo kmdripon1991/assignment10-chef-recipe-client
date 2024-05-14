@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import login from "../../../assets/images/login.jpg";
 import { Link } from "react-router-dom";
-import { FaRegEye } from "react-icons/fa";
+import { FaRegEye, FaGoogle, FaGithub } from "react-icons/fa";
 import { IoMdEyeOff } from "react-icons/io";
 
 const Login = () => {
@@ -15,12 +15,12 @@ const Login = () => {
         <div className="text-center lg:text-left text-white">
           <h1 className="text-5xl font-bold">Login now!</h1>
           <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+            The chef's recipe log in serves as a digital repository,
+            meticulously organizing culinary secrets, from ingredients to
+            cooking techniques and tasting notes.
           </p>
         </div>
-        <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-200 bg-gradient-to-r from-violet-500 to-fuchsia-500">
+        <div className="card shrink-0 w-full max-w-screen-md shadow-2xl bg-base-200 bg-gradient-to-r from-violet-500 to-fuchsia-500">
           <form className="card-body">
             <div className="form-control">
               <label className="label">
@@ -68,6 +68,18 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
+          <div className="card-body pt-0">
+            <div className="flex justify-center gap-8">
+              <button className="btn btn-info">
+                <FaGoogle />
+                <span>Login with Google</span>
+              </button>
+              <button className="btn btn-success">
+                <FaGithub />
+                <span>Login with Github</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
