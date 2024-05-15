@@ -1,11 +1,49 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import login from "../../../assets/images/login.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye, FaGoogle, FaGithub } from "react-icons/fa";
 import { IoMdEyeOff } from "react-icons/io";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const Login = () => {
+  const {userLogin, googleSignIn, gitHubSignIn} = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  
+  const handleUserSignIn = (event)=>{
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    userLogin(email,password)
+    .then(result=>{
+      const loggedUser = result.user;
+      navigate('/')
+      console.log(loggedUser)
+    })
+    .catch(error =>console.error(error.message))
+    console.log(email, password)
+  }
+
+
+  const handleGoogleSignIn =()=>{
+    googleSignIn()
+    .then(result =>{
+      const googleUser = result.user;
+      navigate('/')
+      console.log(googleUser) 
+    })
+    .catch(error=>console.error(error.message))
+  }
+
+  const handleGitHubSignIn =()=>{
+    gitHubSignIn()
+    .then(result=>{
+      const gitHubSignIn = result.user;
+      navigate('/')
+    })
+    .catch(error=>console.error(error.message))
+  }
   return (
     <div
       className="hero min-h-screen"
@@ -21,7 +59,7 @@ const Login = () => {
           </p>
         </div>
         <div className="card shrink-0 w-full max-w-screen-md shadow-2xl bg-base-200 bg-gradient-to-r from-violet-500 to-fuchsia-500">
-          <form className="card-body">
+          <form onSubmit={handleUserSignIn} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -30,6 +68,7 @@ const Login = () => {
                 type="email"
                 placeholder="email"
                 className="input input-bordered"
+                name="email"
                 required
               />
             </div>
@@ -42,6 +81,7 @@ const Login = () => {
                   type={showPassword ? "text" : "password"}
                   placeholder="password"
                   className="grow"
+                  name="password"
                   required
                 />
                 <kbd
@@ -55,12 +95,12 @@ const Login = () => {
                 <div>
                   <Link className=" link link-hover">Forgot password?</Link>{" "}
                   <br />
-                  <Link>
+                  <span>
                     Don't have an account?{" "}
                     <Link to="/register" className="link link-hover text-white">
                       Register now
                     </Link>
-                  </Link>
+                  </span>
                 </div>
               </label>
             </div>
@@ -70,11 +110,11 @@ const Login = () => {
           </form>
           <div className="card-body pt-0">
             <div className="flex justify-center gap-8">
-              <button className="btn btn-info">
+              <button onClick={handleGoogleSignIn} className="btn btn-info">
                 <FaGoogle />
                 <span>Login with Google</span>
               </button>
-              <button className="btn btn-success">
+              <button onClick={handleGitHubSignIn} className="btn btn-success">
                 <FaGithub />
                 <span>Login with Github</span>
               </button>

@@ -1,10 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
+import { updateCurrentUser, updateProfile } from "firebase/auth";
 
 const Register = () => {
-  const user = useContext(AuthContext)
-  console.log(user)
+  const {createUserSignIn, updateUserProfile} = useContext(AuthContext)
+  const [confirmPassword, setConfirmPassword] = useState(null)
+  const handleUserRegistration = (event)=>{
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const photoUrl = form.photo.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    if(password===confirmPassword){
+      createUserSignIn(email,password)
+      .then(result=>{
+        const createdUser = result.user;
+        updateUserProfile(createdUser, name, photoUrl)
+        .then(()=>console.log('user profile updated'))
+        .catch(error=>console.error(error.message))
+      })
+      .catch(error=>console.error(error.message))
+    }
+    else{
+      console.log('your passwoed does not match')
+    }
+  }
+  
   return (
     <section style={{backgroundImage:"url(https://i.ibb.co/xJ8Fk3t/registration.jpg)"}}>
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
@@ -13,7 +36,7 @@ const Register = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create an account
             </h1>
-            <form className="space-y-4 md:space-y-6">
+            <form onSubmit={handleUserRegistration} className="space-y-4 md:space-y-6">
               <div>
                 <label
                   htmlFor="name"
@@ -68,15 +91,16 @@ const Register = () => {
                 </label>
                 <input
                   type="password"
-                  name="new-password"
+                  name="password"
                   placeholder="••••••••"
                   className="input w-full bg-gray-50 text-sm font-medium text-gray-900"
+                  
                   required
                 />
               </div>
               <div>
                 <label
-                  htmlFor="confirm-password"
+                  htmlFor="password"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Confirm password
@@ -86,6 +110,7 @@ const Register = () => {
                   name="confirm-password"
                   placeholder="••••••••"
                   className="input w-full bg-gray-50 text-sm font-medium text-gray-900"
+                  onChange={(e)=>setConfirmPassword(e.target.value)}
                   required
                 />
               </div>
