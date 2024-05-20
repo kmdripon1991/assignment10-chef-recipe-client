@@ -8,11 +8,13 @@ import RecipeLayout from "../layout/RecipeLayout";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import Blog from "../pages/Blog/Blog";
 import BlogLayout from "../layout/BlogLayout";
+import Error from "../pages/Error/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement:<Error/>,
     children: [
       {
         path: "/",
@@ -27,10 +29,6 @@ const router = createBrowserRouter([
         path: "register",
         element: <Register />,
       },
-      // {
-      //   path: "blog",
-      //   element: <Blog/>
-      // },
     ],
   },
   {
