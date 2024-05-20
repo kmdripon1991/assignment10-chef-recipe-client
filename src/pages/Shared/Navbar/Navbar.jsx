@@ -13,7 +13,7 @@ const Navbar = () => {
       .then(() => console.log("user signOut"))
       .catch((error) => console.error(error.message));
   };
-  console.log(user);
+  // console.log(user);
   return (
     <div className="navbar bg-green-600">
       <div className="flex-1">

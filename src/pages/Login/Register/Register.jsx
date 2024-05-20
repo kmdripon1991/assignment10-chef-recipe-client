@@ -2,41 +2,52 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
 import { updateCurrentUser, updateProfile } from "firebase/auth";
+import Error from "../../Error/Error";
 
 const Register = () => {
-  const {createUserSignIn, updateUserProfile} = useContext(AuthContext)
-  const [confirmPassword, setConfirmPassword] = useState(null)
-  const handleUserRegistration = (event)=>{
+  const { createUserSignIn, updateUserProfile } = useContext(AuthContext);
+  const [confirmPassword, setConfirmPassword] = useState(null);
+  const [error, setError] = useState(null);
+  const handleUserRegistration = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
     const photoUrl = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    if(password===confirmPassword){
-      createUserSignIn(email,password)
-      .then(result=>{
-        const createdUser = result.user;
-        updateUserProfile(createdUser, name, photoUrl)
-        .then(()=>console.log('user profile updated'))
-        .catch(error=>console.error(error.message))
-      })
-      .catch(error=>console.error(error.message))
+
+    if (password === confirmPassword) {
+      createUserSignIn(email, password)
+        .then((result) => {
+          const createdUser = result.user;
+          updateUserProfile(createdUser, name, photoUrl)
+            .then(() => console.log("user profile updated"))
+            .catch((error) => setError(error.message));
+        })
+        .catch((error) => {
+          setError(error.message)
+        });
+    } else {
+      alert ('Password did not match')
     }
-    else{
-      console.log('your passwoed does not match')
-    }
-  }
-  
+  };
+
   return (
-    <section style={{backgroundImage:"url(https://i.ibb.co/xJ8Fk3t/registration.jpg)"}}>
+    <section
+      style={{
+        backgroundImage: "url(https://i.ibb.co/xJ8Fk3t/registration.jpg)",
+      }}
+    >
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
         <div className="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-950">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Create an account
             </h1>
-            <form onSubmit={handleUserRegistration} className="space-y-4 md:space-y-6">
+            <form
+              onSubmit={handleUserRegistration}
+              className="space-y-4 md:space-y-6"
+            >
               <div>
                 <label
                   htmlFor="name"
@@ -53,9 +64,7 @@ const Register = () => {
                 />
               </div>
               <div>
-                <label
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
+                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Photo Url
                 </label>
                 <input
@@ -94,7 +103,6 @@ const Register = () => {
                   name="password"
                   placeholder="••••••••"
                   className="input w-full bg-gray-50 text-sm font-medium text-gray-900"
-                  
                   required
                 />
               </div>
@@ -110,7 +118,7 @@ const Register = () => {
                   name="confirm-password"
                   placeholder="••••••••"
                   className="input w-full bg-gray-50 text-sm font-medium text-gray-900"
-                  onChange={(e)=>setConfirmPassword(e.target.value)}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                 />
               </div>
@@ -125,10 +133,7 @@ const Register = () => {
                   />
                 </div>
                 <div className="ml-3 text-sm">
-                  <label
-                    htmlFor="terms"
-                    className="font-light text-gray-500"
-                  >
+                  <label htmlFor="terms" className="font-light text-gray-500">
                     I accept the{" "}
                     <Link
                       className="font-medium text-primary-600 hover:underline"
@@ -139,11 +144,13 @@ const Register = () => {
                   </label>
                 </div>
               </div>
-              <button type="submit" className="btn btn-block">Create an account</button>
+              <button type="submit" className="btn btn-block">
+                Create an account
+              </button>
               <p className="text-sm font-medium text-gray-950">
                 Already have an account?{" "}
                 <Link
-                  to='/login'
+                  to="/login"
                   className="font-medium text-primary hover:underline"
                 >
                   Login here
