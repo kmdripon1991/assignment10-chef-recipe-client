@@ -6,7 +6,7 @@ import Recipe from "../Shared/Recipe/Recipe";
 const RecipeDetails = () => {
   const chefDetails = useLoaderData();
   // const { chefData } = useContext(AuthContext);
-  console.log(chefDetails);
+  // console.log(chefDetails);
   //   console.log(recipesData);
   const {
     name,

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import login from "../../../assets/images/login.jpg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaGoogle, FaGithub } from "react-icons/fa";
 import { IoMdEyeOff } from "react-icons/io";
 import { AuthContext } from "../../../provider/AuthProvider";
@@ -9,6 +9,9 @@ const Login = () => {
   const {userLogin, googleSignIn, gitHubSignIn} = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location)
+  const from = location.state?.from?.pathname;
   
   const handleUserSignIn = (event)=>{
     event.preventDefault();
@@ -18,8 +21,7 @@ const Login = () => {
     userLogin(email,password)
     .then(result=>{
       const loggedUser = result.user;
-      navigate('/')
-      console.log(loggedUser)
+      navigate(from || '/')
     })
     .catch(error =>console.error(error.message))
     console.log(email, password)
