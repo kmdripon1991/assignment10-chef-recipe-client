@@ -13,10 +13,7 @@ const Recipe = ({ recipe }) => {
     if (favorite) {
       setFavorite(!favorite);
       toast("Added as favorite.");
-    } else {
-      setFavorite(!favorite);
-      setDisabled(true)
-      toast("Remove from favorite.");
+      setIsDisabled(true)
     }
   };
   return (
