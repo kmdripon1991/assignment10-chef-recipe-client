@@ -8,12 +8,14 @@ import toast, { Toaster } from "react-hot-toast";
 const Recipe = ({ recipe }) => {
   const { title, recipes_url, directions, ingredients, rating } = recipe;
   const [favorite, setFavorite] = useState(true);
+  const [isDisabled,setIsDisabled] = useState(false)
   const handleFavorite = () => {
     if (favorite) {
       setFavorite(!favorite);
       toast("Added as favorite.");
     } else {
       setFavorite(!favorite);
+      setDisabled(true)
       toast("Remove from favorite.");
     }
   };
@@ -71,7 +73,7 @@ const Recipe = ({ recipe }) => {
             />
             <span>{rating}</span>
           </div>
-          <button onClick={handleFavorite}>
+          <button onClick={handleFavorite} disabled={isDisabled}>
             {favorite ? (
               <GrFavorite className="text-2xl" />
             ) : (
