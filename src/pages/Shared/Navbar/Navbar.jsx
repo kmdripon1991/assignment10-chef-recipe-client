@@ -4,25 +4,21 @@ import { AuthContext } from "../../../provider/AuthProvider";
 
 const Navbar = () => {
   const { user, userSignOut, loader } = useContext(AuthContext);
-  // if (loader) {
-  //   return;
-  // }
 
   const handleSignOut = () => {
     userSignOut()
       .then(() => console.log("user signOut"))
       .catch((error) => console.error(error.message));
   };
-  // console.log(user);
   return (
     <div className="top-0 py-1 lg:py-2 w-full bg-transparent lg:relative z-50 bg-base-200">
       <nav className="z-10 sticky top-0 left-0 right-0 max-w-4xl xl:max-w-5xl mx-auto px-5 py-2.5 lg:border-none lg:py-4">
         <div className="flex items-center justify-between">
-          <button className="btn btn-ghost normal-case text-2xl">
+          <Link to='/' className="normal-case text-4xl">
             <div className="flex items-center space-x-2">
-              <h2 className="text-neutral-content font-bold">pantaBhat</h2>
+              <h2 className="text-neutral-content font-bold tracking-wider">mammaMia</h2>
             </div>
-          </button>
+          </Link>
           <div className="hidden lg:block">
             <ul className="menu menu-horizontal space-x-10 text-base font-bold">
               <li>
@@ -39,14 +35,6 @@ const Navbar = () => {
                   className="hover:underline hover:underline-offset-4"
                 >
                   Blog
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/contact"
-                  className="hover:underline hover:underline-offset-4"
-                >
-                  Contact
                 </NavLink>
               </li>
             </ul>
