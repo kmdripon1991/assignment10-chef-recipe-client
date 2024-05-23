@@ -10,13 +10,13 @@ const Carousel = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="relative h-full flex flex-col justify-center items-start p-8 mx-auto text-white">
-          <h2 className="text-4xl font-bold">Authentic Italian Cuisine</h2>
+          <h2 className="text-4xl font-bold">Authentic Italian Food</h2>
           <p className="mt-4 text-lg">
             Experience the true flavors of Italy with our traditional recipes
             and high-quality ingredients.
           </p>
           <div className="mt-6">
-            <button className="btn btn-primary">Explore Menu</button>
+            <button className="btn btn-primary">Explore More</button>
           </div>
         </div>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -35,13 +35,13 @@ const Carousel = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="relative h-full flex flex-col justify-center items-start p-8 mx-auto text-white">
-          <h2 className="text-4xl font-bold">Authentic Italian Cuisine</h2>
+          <h2 className="text-4xl font-bold">Classic Margherita Pizza</h2>
           <p className="mt-4 text-lg">
-            Experience the true flavors of Italy with our traditional recipes
-            and high-quality ingredients.
+            Enjoy Italy's best with fresh dough, rich tomato sauce, mozzarella,
+            and basil. Simple, authentic, and delicious!
           </p>
           <div className="mt-6">
-            <button className="btn btn-primary">Explore Menu</button>
+            <button className="btn btn-primary">Explore More</button>
           </div>
         </div>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -60,13 +60,14 @@ const Carousel = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="relative h-full flex flex-col justify-center items-start p-8 mx-auto text-white">
-          <h2 className="text-4xl font-bold">Authentic Italian Cuisine</h2>
+          <h2 className="text-4xl font-bold">Italian Culinary Excellence</h2>
           <p className="mt-4 text-lg">
-            Experience the true flavors of Italy with our traditional recipes
-            and high-quality ingredients.
+            Experience culinary excellence with time-honored recipes crafted
+            from the finest, freshest ingredients for an authentic taste
+            sensation.
           </p>
           <div className="mt-6">
-            <button className="btn btn-primary">Explore Menu</button>
+            <button className="btn btn-primary">Explore More</button>
           </div>
         </div>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -85,13 +86,15 @@ const Carousel = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="relative h-full flex flex-col justify-center items-start p-8 mx-auto text-white">
-          <h2 className="text-4xl font-bold">Authentic Italian Cuisine</h2>
+          <h2 className="text-4xl font-bold">
+            Masters of Italian Culinary Art
+          </h2>
           <p className="mt-4 text-lg">
-            Experience the true flavors of Italy with our traditional recipes
-            and high-quality ingredients.
+            Italian cuisine's expert chefs blend tradition and innovation,
+            crafting exquisite dishes with high-quality ingredients.
           </p>
           <div className="mt-6">
-            <button className="btn btn-primary">Explore Menu</button>
+            <button className="btn btn-primary">Explore More</button>
           </div>
         </div>
         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">

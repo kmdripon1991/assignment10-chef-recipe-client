@@ -19,7 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
-        loader: ()=>fetch('http://localhost:5000/chef-recipe')
+        loader: () =>
+          fetch(
+            "https://assignment10-chef-recipe-server.vercel.app/chef-recipe"
+          ),
       },
       {
         path: "login",
@@ -32,26 +35,33 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path:'chef-recipe',
-    element:<RecipeLayout/>,
-    children:[
+    path: "chef-recipe",
+    element: <RecipeLayout />,
+    children: [
       {
-        path:':id',
-        element:<PrivateRoute><RecipeDetails/></PrivateRoute>,
-        loader:({params})=>fetch(`http://localhost:5000/chef-recipe/${params.id}`)
-      }
-    ]
+        path: ":id",
+        element: (
+          <PrivateRoute>
+            <RecipeDetails />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://assignment10-chef-recipe-server.vercel.app/chef-recipe/${params.id}`
+          ),
+      },
+    ],
   },
   {
-    path:'blog',
-    element:<BlogLayout/>,
-    children:[
+    path: "blog",
+    element: <BlogLayout />,
+    children: [
       {
-        path:'/blog',
-        element:<Blog></Blog>
-      }
-    ]
-  }
+        path: "/blog",
+        element: <Blog></Blog>,
+      },
+    ],
+  },
 ]);
 
 export default router;

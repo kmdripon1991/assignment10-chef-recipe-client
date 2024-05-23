@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
 import { updateCurrentUser, updateProfile } from "firebase/auth";
 import Error from "../../Error/Error";
 
 const Register = () => {
-  const { createUserSignIn, updateUserProfile } = useContext(AuthContext);
+  const { createUserSignIn, updateUserProfile, loading } = useContext(AuthContext);
   const [confirmPassword, setConfirmPassword] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
   const handleUserRegistration = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -15,21 +16,26 @@ const Register = () => {
     const photoUrl = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    
 
-    if (password === confirmPassword) {
+    if (password === confirmPassword && regex.test(password)) {
       createUserSignIn(email, password)
         .then((result) => {
           const createdUser = result.user;
           updateUserProfile(createdUser, name, photoUrl)
             .then(() => console.log("user profile updated"))
             .catch((error) => setError(error.message));
+
         })
         .catch((error) => {
-          setError(error.message)
+          setError(error.message);
         });
     } else {
-      alert ('Password did not match')
+      alert("Minimum six characters, at least one letter and one number");
     }
+    navigate('/')
+    form.reset();
   };
 
   return (
@@ -121,6 +127,7 @@ const Register = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                 />
+                <p><small className="text-gray-950">Minimum six characters, at least one letter and one number</small></p>
               </div>
               <div className="flex items-start">
                 <div className="flex items-center h-5">

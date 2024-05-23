@@ -15,7 +15,7 @@ const Chef = ({ data }) => {
     
 
   return (
-    <div className="card bg-cyan-100 shadow-xl w-full">
+    <div className="card bg-gray-200 shadow-xl w-full">
       <figure>
         <img src={picture_url} alt="Shoes" />
       </figure>
